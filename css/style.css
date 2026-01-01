@@ -131,7 +131,7 @@ html, body {
 
     .profile-img {
         position: static;
-        display: block;
+        display: flex;
         margin: 0 auto 1.5rem auto;
     }
 
