@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.base-bg {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(to top, #000000, #2b2b2b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.base-container {
+    position: relative;
+    width: 85%;
+    max-width: 1100px;
+    min-height: 420px;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(40px);
+    border: 1px solid #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
+}
+.profile-img {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.identity {
+    color: #f0f0f0;
+    max-width: 60%;
+}
+
+.name {
+    font-size: 2.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.name:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.role {
+    font-size: 1rem;
+    color: #cccccc;
+}
+
+.minidesc {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+    color: #cccccc;
+}
+
+
+.social-btn {
+    background: rgba(128, 128, 128, 0.4);
+    border-radius: 4px;
+    color: white;
+    border: 1px solid #2b2b2b;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 175px;
+    right: 50px;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    color: #2b2b2b;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.info-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    max-width: 65%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.info-box:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    border: 1px solid #ffffff;
+
+}
+
+.info-inner-box {
+    display: grid;
+    /* justify-self: center; */
+    margin-top: 2rem;
+    padding: 1.5rem;
+    max-width: 80%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    color: #ffffff;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+@media (max-width: 768px) {
+    html, body {
+        overflow: auto;
+    }
+
+    .base-container {
+        width: 92%;
+        padding: 2rem;
+    }
+
+    .profile-img {
+        position: static;
+        margin: 0 auto 1.5rem auto;
+    }
+
+    .identity,
+    .info-box,
+    .info-inner-box {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .social-btn {
+        position: static;
+        margin-top: 1rem;
+        display: inline-block;
+    }
+}
