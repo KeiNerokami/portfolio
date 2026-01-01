@@ -40,7 +40,6 @@ html, body {
     height: 125px;
     border-radius: 50%;
     border: 2px solid #ffffff;
-    background: rgba(255, 255, 255, 0.15);
 }
 
 .identity {
