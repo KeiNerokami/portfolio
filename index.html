@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rei | Portfolio</title>
-
+    <link rel="icon" type="image/x-icon" href="assets/icon/ico.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preload" href="assets/imgs/main.JPG" as="image">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,25 +14,26 @@
 
 <div class="base-bg">
     <div class="base-container">
-        <img class="profile-img" src="https://raw.githubusercontent.com/KeiNerokami/portfolio/9fe6ea6b996873a4c42290ad09e32b63d21e7c3f/imgs/main.JPG" alt="Profile Picture">
+        <button class="open-btn" onclick="openSidebar()"><i class="bi bi-list"></i></button>
+        <img class="profile-img" src="assets/imgs/main.JPG" alt="Profile Picture" onclick="showImageModal()">
 
         <div class="identity">
             <h1 class="name">Rei</h1>
             <p class="minidesc">or Reighly</p>
             <p class="role">Developer • Student • Builder</p>
-            <button class="social-btn" id="email" onclick="window.location.href='mailto:example@example.com'">Email Me</button>
+            <button class="social-btn" id="email" onclick="window.location.href='mailto:example@example.com'"><i class="bi bi-envelope"></i></button>
         </div>
 
         <div class="info-box">
             <h4>About Me</h4>
             <p>
-                This is my portfolio space. Add background, skills,
+                This is your portfolio space. Add your background, skills,
                 projects, and philosophy here.
             </p>
             <div class="info-inner-box">
             <h4>Table</h4>
             <p>
-                This space is for mu skills or project. Add background, skills,
+                This space is for your skills or project. Add your background, skills,
                 projects, and philosophy here.
             </p>
             <h4>Table</h4>
@@ -41,6 +43,23 @@
         </div>
        
     </div>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">&times;</button>
+    <button class="sidebar-btn">About me</button>
+    <button class="sidebar-btn">Projects</button>
+    <button class="sidebar-btn">Contacts</button>
+</div>
+
+<div id="image-modal" class="image-modal">
+    <img src="assets/imgs/main.JPG" alt="Profile" class="modal-img">
+    <div class="modal-buttons">
+        <button class="social-btn-modal" onclick="window.location.href='https://discordapp.com/users/1006187617987068014'"><i class="bi bi-discord"></i></button>
+        <button class="social-btn-modal" onclick="window.location.href='mailto:unknown.bit.609@gmail.com'"><i class="bi bi-envelope"></i></button>
+        <button class="social-btn-modal" onclick="window.location.href='https://github.com/KeiNerokami'"><i class="bi bi-github"></i></button>
+    </div>
+    <button class="modal-close" onclick="closeImageModal()">&times;</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

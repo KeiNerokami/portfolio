@@ -39,7 +39,12 @@ html, body {
     width: 125px;
     height: 125px;
     border-radius: 50%;
+    transition: all 0.3s ease;
     border: 2px solid #ffffff;
+}
+
+.profile-img:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .identity {
@@ -71,6 +76,7 @@ html, body {
 
 
 .social-btn {
+    display: flex;
     background: rgba(128, 128, 128, 0.4);
     border-radius: 4px;
     color: white;
@@ -78,7 +84,7 @@ html, body {
     padding: 0.5rem 1rem;
     position: absolute;
     top: 175px;
-    right: 50px;
+    right: 5.5em;
     transition: all 0.3s ease;
 }
 
@@ -86,6 +92,22 @@ html, body {
     color: #2b2b2b;
     background: rgba(255, 255, 255, 0.4);
     border: 1px solid #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.open-btn {
+    background: rgba(255, 255, 255, 0);
+    font-size: 1.3rem;
+    border-radius: 2px;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.open-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
@@ -118,6 +140,133 @@ html, body {
     grid-template-columns: repeat(2, 1fr);
 }
 
+.sidebar {
+    position: fixed;
+    top: 1.1em;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    max-height: 95%;
+    background: #2b2b2b;
+    border-radius: 26px;
+    backdrop-filter: blur(40px);
+    border: 1px solid #ffffff;
+    transition: left 0.3s ease;
+    z-index: 1002;
+    padding: 4rem 2rem 2rem 2rem;
+    box-sizing: border-box;
+}
+
+.sidebar-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 1em;
+    text-align: left;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid #2b2b2b;
+}
+
+.sidebar-btn:hover {
+    background: white;
+    color: black;
+    border: 1px solid white;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 1em;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    border: 1px solid #2b2b2b;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5)
+}
+
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 2000;
+}
+
+.modal-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    border: 2px solid #ffffff;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.modal-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: rgba(128, 128, 128, 0.4);
+    border-radius: 2px;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    z-index: 2001;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.modal-buttons {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+}
+
+.social-btn-modal {
+    background: rgba(128, 128, 128, 0.4);
+    border-radius: 4px;
+    color: white;
+    border: 1px solid #2b2b2b;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.social-btn-modal:hover {
+    color: #2b2b2b;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
 
 @media (max-width: 768px) {
     html, body {
@@ -131,7 +280,7 @@ html, body {
 
     .profile-img {
         position: static;
-        display: flex;
+        display: block;
         margin: 0 auto 1.5rem auto;
     }
 
@@ -145,6 +294,12 @@ html, body {
     .social-btn {
         position: static;
         margin-top: 1rem;
+        display: inline-block;
+    }
+
+    .open-btn {
+        position: static;
+        margin-bottom: 1rem;
         display: inline-block;
     }
 }
