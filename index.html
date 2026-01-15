@@ -11,58 +11,77 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<header id="header">
+    <img src="assets/imgs/main.JPG" class="mini-profile" onclick="showImageModal()">
+</header>
+<article>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">&times;</button>
+        <button class="sidebar-btn" onclick="navigateTo('pages/projects/')">Projects</button>
+        <button class="sidebar-btn" onclick="navigateTo('pages/contacts/')">Contacts</button>
+    </div>
+    <div class="base-bg ">
+        
+        <div class="base-container ">
+            <button class="open-btn" onclick="openSidebar()"><i class="bi bi-list"></i></button>
+            <img class="profile-img" src="assets/imgs/main.JPG" alt="Profile Picture" onclick="showImageModal()">
 
-<div class="base-bg">
+
+            <div class="identity">
+                <h1 class="name">Rei</h1>
+                <p class="minidesc">or Reighly</p>
+                <p class="role">Developer • Student • Builder</p>
+            </div>
+
+            <div class="social-contents">
+                <button class="social-btn" id="email" onclick="window.location.href='mailto:example@example.com'"><i class="bi bi-envelope"></i></button>
+                <button class="social-btn" id="github" onclick="window.location.href='https://github.com/KeiNerokami'"><i class="bi bi-github"></i></button>
+                <button class="social-btn" id="discord" onclick="window.location.href='https://discordapp.com/users/1006187617987068014'"><i class="bi bi-discord"></i></button>
+            </div>
+
+            <div class="info-box">
+                <h4>About Me</h4>
+                <p>
+                    This is your portfolio space. Add your background, skills,
+                    projects, and philosophy here.
+                </p>
+                <div class="info-inner-box">
+                <h4>Table</h4>
+                <p>
+                    This space is for your skills or project. Add your background, skills,
+                    projects, and philosophy here.
+                </p>
+                <h4>Table</h4>
+                <p aria-placeholder="empty">
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+    
     <div class="base-container">
-        <button class="open-btn" onclick="openSidebar()"><i class="bi bi-list"></i></button>
-        <img class="profile-img" src="assets/imgs/main.JPG" alt="Profile Picture" onclick="showImageModal()">
-
-        <div class="identity">
-            <h1 class="name">Rei</h1>
-            <p class="minidesc">or Reighly</p>
-            <p class="role">Developer • Student • Builder</p>
-            <button class="social-btn" id="email" onclick="window.location.href='mailto:example@example.com'"><i class="bi bi-envelope"></i></button>
+        <div class="info-text-box">
+            Pretty much the same as info-box but bigger
         </div>
+    </div>
+        
+</article>
 
-        <div class="info-box">
-            <h4>About Me</h4>
-            <p>
-                This is your portfolio space. Add your background, skills,
-                projects, and philosophy here.
-            </p>
-            <div class="info-inner-box">
-            <h4>Table</h4>
-            <p>
-                This space is for your skills or project. Add your background, skills,
-                projects, and philosophy here.
-            </p>
-            <h4>Table</h4>
-            <p aria-placeholder="empty">
-                
-            </p>
+    <div id="image-modal" class="image-modal">
+        <img src="assets/imgs/main.JPG" alt="Profile" class="modal-img">
+        <div class="modal-buttons">
+            <button class="social-btn-modal" onclick="window.location.href='https://discordapp.com/users/1006187617987068014'"><i class="bi bi-discord"></i></button>
+            <button class="social-btn-modal" onclick="window.location.href='mailto:unknown.bit.609@gmail.com'"><i class="bi bi-envelope"></i></button>
+            <button class="social-btn-modal" onclick="window.location.href='https://github.com/KeiNerokami'"><i class="bi bi-github"></i></button>
         </div>
-       
+        <button class="modal-close" onclick="closeImageModal()">&times;</button>
     </div>
-</div>
 
-<div class="sidebar" id="sidebar">
-    <button class="close-btn" onclick="closeSidebar()">&times;</button>
-    <button class="sidebar-btn">About me</button>
-    <button class="sidebar-btn">Projects</button>
-    <button class="sidebar-btn">Contacts</button>
-</div>
-
-<div id="image-modal" class="image-modal">
-    <img src="assets/imgs/main.JPG" alt="Profile" class="modal-img">
-    <div class="modal-buttons">
-        <button class="social-btn-modal" onclick="window.location.href='https://discordapp.com/users/1006187617987068014'"><i class="bi bi-discord"></i></button>
-        <button class="social-btn-modal" onclick="window.location.href='mailto:unknown.bit.609@gmail.com'"><i class="bi bi-envelope"></i></button>
-        <button class="social-btn-modal" onclick="window.location.href='https://github.com/KeiNerokami'"><i class="bi bi-github"></i></button>
-    </div>
-    <button class="modal-close" onclick="closeImageModal()">&times;</button>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/main.js"></script>
+<footer class="bottom">
+    <p>© 2024 Rei. All rights reserved.</p>
+    <small> Cause there is nothing to be copyrighted</small>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
