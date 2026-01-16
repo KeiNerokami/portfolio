@@ -209,3 +209,132 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.addEventListener('resize', handleOpenBtnPosition);
+/* ===== Image Preloader ===== */
+function preloadImages() {
+    const imageSelectors = [
+        'img',
+        'img[src]',
+        '[style*="background-image"]'
+    ];
+    
+    const imagesToLoad = [];
+    
+    // Collect all img elements
+    document.querySelectorAll('img').forEach(img => {
+        if (img.src && !img.src.includes('data:')) {
+            imagesToLoad.push(img.src);
+        }
+    });
+    
+    // Collect background images from style attributes
+    document.querySelectorAll('[style*="background-image"]').forEach(element => {
+        const match = element.style.backgroundImage.match(/url\(['"]?([^'")]+)['"]?\)/);
+        if (match && match[1]) {
+            imagesToLoad.push(match[1]);
+        }
+    });
+    
+    // Preload images
+    imagesToLoad.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+    
+    console.log(`Preloading ${imagesToLoad.length} images`);
+}
+
+// Run preloader when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', preloadImages);
+} else {
+    preloadImages();
+}
+
+/* ===== Placeholder Image API (Picsum.photos) ===== */
+
+/**
+ * Get a placeholder image URL from Picsum.photos
+ * @param {number} width - Image width in pixels
+ * @param {number} height - Image height in pixels
+ * @param {string|number} seed - Optional seed for consistent image OR image ID (use "id:42" format)
+ * @returns {string} Placeholder image URL
+ */
+function getPlaceholderImage(width = 300, height = 300, seed = '') {
+    if (String(seed).startsWith('id:')) {
+        // Use specific image ID
+        const id = String(seed).substring(3);
+        return `https://picsum.photos/id/${id}/${width}/${height}`;
+    }
+    const seedParam = seed ? `?random=${seed}` : '';
+    return `https://picsum.photos/${width}/${height}${seedParam}`;
+}
+
+/**
+ * Get a grayscale placeholder image
+ * @param {number} width - Image width in pixels
+ * @param {number} height - Image height in pixels
+ * @param {string|number} seed - Optional seed for consistent image OR image ID (use "id:42" format)
+ * @returns {string} Grayscale placeholder image URL
+ */
+function getPlaceholderImageGrayscale(width = 300, height = 300, seed = '') {
+    if (String(seed).startsWith('id:')) {
+        const id = String(seed).substring(3);
+        return `https://picsum.photos/id/${id}/${width}/${height}?grayscale`;
+    }
+    const seedParam = seed ? `&random=${seed}` : '';
+    return `https://picsum.photos/${width}/${height}?grayscale${seedParam}`;
+}
+
+/**
+ * Get a blurred placeholder image
+ * @param {number} width - Image width in pixels
+ * @param {number} height - Image height in pixels
+ * @param {number} blur - Blur amount (1-10)
+ * @param {string} seed - Optional seed for consistent image
+ * @returns {string} Blurred placeholder image URL
+ */
+function getPlaceholderImageBlurred(width = 300, height = 300, blur = 5, seed = '') {
+    const seedParam = seed ? `&random=${seed}` : '';
+    return `https://picsum.photos/${width}/${height}?blur=${blur}${seedParam}`;
+}
+
+/**
+ * Load placeholder images into elements with data-placeholder attribute
+ * Format: data-placeholder="width,height[,seed][,style]"
+ * Styles: 'grayscale', 'blur'
+ * Example: <img data-placeholder="300,300,seed1,grayscale">
+ */
+function loadPlaceholderImages() {
+    document.querySelectorAll('[data-placeholder]').forEach(element => {
+        const params = element.getAttribute('data-placeholder').split(',');
+        const width = parseInt(params[0]) || 300;
+        const height = parseInt(params[1]) || 300;
+        const seed = params[2] || '';
+        const style = params[3] || 'normal';
+
+        let url;
+        switch (style) {
+            case 'grayscale':
+                url = getPlaceholderImageGrayscale(width, height, seed);
+                break;
+            case 'blur':
+                url = getPlaceholderImageBlurred(width, height, 5, seed);
+                break;
+            default:
+                url = getPlaceholderImage(width, height, seed);
+        }
+
+        if (element.tagName === 'IMG') {
+            element.src = url;
+        } else {
+            element.style.backgroundImage = `url('${url}')`;
+        }
+    });
+}
+
+// Load placeholder images on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPlaceholderImages);
+} else {
+    loadPlaceholderImages();
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placeholder Images Examples</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #fff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Placeholder Image Examples</h1>
+
+    <h2>Basic - Random Images</h2>
+    <div class="gallery">
+        <img data-placeholder="300,300" alt="Placeholder 300x300">
+        <img data-placeholder="400,250" alt="Placeholder 400x250">
+        <img data-placeholder="200,400" alt="Placeholder 200x400">
+    </div>
+
+    <h2>With Seeds - Consistent Images</h2>
+    <div class="gallery">
+        <img data-placeholder="300,300,seed1" alt="Seeded placeholder 1">
+        <img data-placeholder="300,300,seed1" alt="Seeded placeholder 2">
+        <img data-placeholder="300,300,seed1" alt="Seeded placeholder 3">
+    </div>
+
+    <h2>Grayscale</h2>
+    <div class="gallery">
+        <img data-placeholder="300,300,seed2,grayscale" alt="Grayscale 1">
+        <img data-placeholder="300,300,seed3,grayscale" alt="Grayscale 2">
+        <img data-placeholder="300,300,seed4,grayscale" alt="Grayscale 3">
+    </div>
+
+    <h2>Blurred</h2>
+    <div class="gallery">
+        <img data-placeholder="300,300,seed5,blur" alt="Blurred 1">
+        <img data-placeholder="300,300,seed6,blur" alt="Blurred 2">
+        <img data-placeholder="300,300,seed7,blur" alt="Blurred 3">
+    </div>
+
+    <h2>Different Sizes</h2>
+    <div class="gallery">
+        <img data-placeholder="800,400" alt="Wide image">
+        <img data-placeholder="300,600" alt="Tall image">
+        <img data-placeholder="600,600" alt="Square image">
+    </div>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

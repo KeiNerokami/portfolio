@@ -7,8 +7,38 @@
 html, body {
     background-color: #2b2b2b;
     height: 100%;
-    overflow: visible;
+    overflow-x: hidden;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Scrollbar Styling */
+html {
+    padding-top: 4em;
+}
+
+html::-webkit-scrollbar {
+    width: 12px;
+    ;
+}
+
+html::-webkit-scrollbar-track {
+    background: #2b2b2b;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Firefox */
+html {
+    scrollbar-color: rgba(255, 255, 255, 0.3) #2b2b2b;
+    scrollbar-width: thin;
+    scroll-padding-top: 4em;
 }
 
 
@@ -234,10 +264,106 @@ footer small {
     transition: all 0.3s ease;
 }
 
+.info-text-box:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    border: 1px solid #ffffff;
+}
+
 .info-box:hover {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     border: 1px solid #ffffff;
+}
 
+/* Info Image Styles */
+.info-img {
+    overflow: hidden;
+    border-radius: 13px;
+    margin-top: 1.5em;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    
+}
+
+.info-img-tiled {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.info-img-tiled .info-img {
+    aspect-ratio: 1;
+}
+
+.info-img-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.info-img-column .info-img {
+    width: 100%;
+    height: auto;
+}
+
+.info-img-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.info-img-row .info-img {
+    min-width: 200px;
+    height: auto;
+}
+
+.info-img-left {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.info-img-left .info-img {
+    flex-shrink: 0;
+    width: 40%;
+    min-width: 250px;
+}
+
+.info-img-left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.info-img-left-content p {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    max-width: 100%;
+    /* background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3); */
+    border-radius: 16px;
+    color: #ffffff;
+}
+
+.info-img-headline {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.info-img-sub {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    display: block;
 }
 
 .info-box .info-inner-box {
@@ -389,7 +515,8 @@ footer small {
 
 @media (max-width: 768px) {
     html, body {
-        overflow: visible;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .base-container {
@@ -453,6 +580,41 @@ footer small {
         position: static;
         margin-bottom: 1rem;
         display: inline-block;
+    }
+
+    /* Mobile Info Image Styles */
+    .info-img-tiled {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .info-img-row {
+        flex-direction: column;
+    }
+
+    .info-img-row .info-img {
+        min-width: 100%;
+    }
+
+    .info-img-headline {
+        max-height: 300px;
+    }
+
+    .info-img-sub {
+        max-height: 200px;
+    }
+
+    /* Mobile Info Image Left Layout */
+    .info-img-left {
+        flex-direction: column;
+    }
+
+    .info-img-left .info-img {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .info-img-left-content {
+        width: 100%;
     }
 }
 
@@ -774,4 +936,174 @@ footer.rightshitfed.out-of-view {
     .contact-icon {
         font-size: 2.5rem;
     }
+}
+
+/* Contribution Graph Styles */
+.contribution-pane {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contribution-graph {
+    width: 100%;
+    overflow-x: auto;
+    padding: 1rem 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contribution-graph ::-webkit-scrollbar {
+    display: none;
+}
+
+.contribution-table {
+    display: inline-flex;
+    gap: 0.3rem;
+    flex-direction: row-reverse;
+    z-index: 1000;
+}
+
+.contribution-week {
+    display: flex;
+    gap: 0.3rem;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.contribution-day {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.contribution-day:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Contribution levels - matching GitHub theme with dark background */
+.contribution-level-0 {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.contribution-level-1 {
+    background-color: rgba(76, 175, 80, 0.3);
+}
+
+.contribution-level-2 {
+    background-color: rgba(76, 175, 80, 0.5);
+}
+
+.contribution-level-3 {
+    background-color: rgba(76, 175, 80, 0.7);
+}
+
+.contribution-level-4 {
+    background-color: rgba(76, 175, 80, 1);
+}
+
+.contribution-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+#legend-squares {
+    display: flex !important;
+    gap: 0.3rem;
+}
+
+.legend-square {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contribution-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-0.5rem);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.contribution-day:hover .contribution-tooltip {
+    opacity: 1;
+}
+
+.contribution-month-label {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.months-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+    .contribution-day {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+    }
+    
+    .contribution-graph {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .contribution-legend {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+/* Contribution Graph Scrollbar */
+#contribution-scroll-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+#contribution-scroll-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#contribution-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+#contribution-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Firefox */
+#contribution-scroll-wrapper {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    scrollbar-width: thin;
 }
