@@ -33,6 +33,13 @@ const CONTACTS = [
         url: 'mailto:unknown.bit.609@gmail.com',
         theme: '#FF6B6B',
         displayName: 'unknown.bit.609@gmail.com'
+    },
+    {
+        id: 'reach-out',
+        name: 'Reach Out',
+        icon: 'bi-globe',
+        theme: '#4A90E2',
+        isModal: true
     }
 ];
 
@@ -59,7 +66,7 @@ async function fetchContactProfiles() {
         else if (contact.id === 'email' || contact.id === 'facebook') {
             displayName = contact.displayName;
         }
-        // Discord would need token, so we'll just use the name
+        // Discord would need token, so just use the name
         else if (contact.id === 'discord') {
             displayName = 'Discord User';
         }
@@ -77,15 +84,20 @@ function createContactCard(contact, displayName) {
     card.dataset.id = contact.id;
     card.style.setProperty('--theme-color', contact.theme);
     
+    let buttonHTML;
+    if (contact.isModal) {
+        buttonHTML = `<button class="contact-btn" onclick="openReachOutModal()">Connect</button>`;
+    } else {
+        buttonHTML = `<button class="contact-btn" onclick="window.open('${contact.url}', '_blank')">Connect</button>`;
+    }
+    
     card.innerHTML = `
         <div class="contact-content">
             <i class="bi ${contact.icon} contact-icon"></i>
             <h3 class="contact-platform">${contact.name}</h3>
-            <p class="contact-name">${displayName}</p>
+            <p class="contact-name">${contact.isModal ? 'Get in touch directly' : displayName}</p>
         </div>
-        <button class="contact-btn" onclick="window.open('${contact.url}', '_blank')">
-            Connect
-        </button>
+        ${buttonHTML}
     `;
     
     container.appendChild(card);
@@ -94,3 +106,35 @@ function createContactCard(contact, displayName) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchContactProfiles();
 });
+
+/**
+ * Open the reach out form modal
+ */
+function openReachOutModal() {
+    const modal = document.getElementById('reach-out-modal');
+    if (modal) {
+        modal.classList.add('show');
+        modal.style.opacity = '1';
+        modal.style.visibility = 'visible';
+    }
+}
+
+/**
+ * Close the reach out form modal
+ */
+function closeReachOutModal() {
+    const modal = document.getElementById('reach-out-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.opacity = '0';
+        modal.style.visibility = 'hidden';
+    }
+}
+
+/**
+ * Handle immutable input click
+ */
+function onImmutableInputClick(event) {
+    event.preventDefault();
+    showErrorToast('Under construction');
+}

@@ -1,0 +1,21 @@
+<div id="reach-out-modal" class="reach-out-modal">
+    <div class="reach-out-modal-content">
+        <button class="modal-close" onclick="closeReachOutModal()">&times;</button>
+        <h2 style="color: #f0f0f0; margin-bottom: 1.5rem;">Let's Connect</h2>
+        <form class="reach-out-form">
+            <div class="form-group">
+                <label for="reach-name">Name</label>
+                <input id="reach-name" class="immutable-input" placeholder="Enter your name" onclick="onImmutableInputClick(event)" readonly>
+            </div>
+            <div class="form-group">
+                <label for="reach-email">Email</label>
+                <input id="reach-email" type="email" class="immutable-input" placeholder="Enter your email" onclick="onImmutableInputClick(event)" readonly>
+            </div>
+            <div class="form-group">
+                <label for="reach-message">Message</label>
+                <textarea id="reach-message" class="immutable-input" placeholder="Enter your message" onclick="onImmutableInputClick(event)" readonly></textarea>
+            </div>
+            <button type="submit" class="reach-out-submit" onclick="event.preventDefault(); onImmutableInputClick(event);">Send Message</button>
+        </form>
+    </div>
+</div>

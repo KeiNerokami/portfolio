@@ -178,7 +178,7 @@ async function fetchContributionData() {
     }
 }
 
-// Fallback method using REST API to get user activity
+// Fallback method - REST API to get user activity
 async function fetchContributionDataFallback() {
     try {
         const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=300`, {
@@ -193,7 +193,7 @@ async function fetchContributionDataFallback() {
 
         const events = await response.json();
         
-        // Generate contribution data from events
+        // Generate contrib data from events
         const weeks = generateContributionWeeks(events);
         displayContributions(weeks, events.length);
     } catch (error) {
@@ -207,7 +207,7 @@ function generateContributionWeeks(events) {
     const today = new Date();
     const oneYearAgo = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
     
-    // Create a map of contribution counts by date
+    // Create a map of contrib counts by date
     const contributionMap = {};
     
     events.forEach(event => {
@@ -218,7 +218,7 @@ function generateContributionWeeks(events) {
         }
     });
     
-    // Generate weeks array
+    // Generate weeks arry
     const weeks = [];
     let currentDate = new Date(oneYearAgo);
     
@@ -253,7 +253,7 @@ function displayContributions(weeks, totalContributions) {
     // Group weeks by month
     const monthGroups = groupWeeksByMonth(weeks);
     
-    // Create contribution grid
+    // Create contrib grid
     const weeksArray = weeks.slice(-52); // Last 52 weeks
     weeksArray.forEach(week => {
         const weekDiv = document.createElement('div');
@@ -264,10 +264,15 @@ function displayContributions(weeks, totalContributions) {
             dayDiv.className = `contribution-day ${getContributionLevelClass(day.contributionCount)}`;
             
             dayDiv.innerHTML = `
-                <div class="contribution-tooltip">
+                <!-- <div class="contribution-tooltip">
                     ${day.contributionCount} contribution${day.contributionCount !== 1 ? 's' : ''} on ${new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                </div>
+                </div> -->
             `;
+            
+            // Add tooltip border checking on hover
+            // dayDiv.addEventListener('mouseenter', function() {
+            //     checkTooltipBorders(this);
+            // });
             
             weekDiv.appendChild(dayDiv);
         });
@@ -326,3 +331,100 @@ function displayContributionError() {
     const container = document.getElementById('contribution-scroll-wrapper');
     container.innerHTML = '<div style="text-align: center; color: #999; padding: 2rem;">Unable to load contribution data. Please visit <a href="https://github.com/KeiNerokami" target="_blank" style="color: #4CAF50;">GitHub</a> to view contributions.</div>';
 }
+
+// Check tooltip borders and adjust positioning
+/*
+function checkTooltipBorders(dayElement) {
+    const tooltip = dayElement.querySelector('.contribution-tooltip');
+    if (!tooltip) return;
+    
+    // Remove existing positioning classes
+    tooltip.classList.remove('tooltip-left', 'tooltip-right');
+    
+    // Use a small timeout to ensure tooltip is rendered for measurement
+    setTimeout(() => {
+        const scrollWrapper = document.getElementById('contribution-scroll-wrapper');
+        const table = document.querySelector('.contribution-table');
+        const dayRect = dayElement.getBoundingClientRect();
+        const scrollWrapperRect = scrollWrapper.getBoundingClientRect();
+        const tableRect = table.getBoundingClientRect();
+        
+        // Get window height for bottom detection
+        const windowHeight = window.innerHeight;
+        const distanceFromBottom = windowHeight - dayRect.bottom;
+        
+        // Check if tile is near the bottom (less than 150px from bottom)
+        const isNearBottom = distanceFromBottom < 150;
+        
+        // Check if tile is on the left side of the table (within left 30%)
+        const tableWidth = tableRect.width;
+        const tilePositionInTable = dayRect.left - tableRect.left;
+        const isOnLeft = tilePositionInTable < tableWidth * 0.3;
+        
+        // Check if tile is on the right side of the table (within right 30%)
+        const isOnRight = tilePositionInTable > tableWidth * 0.7;
+        
+        // Reset inline styles
+        tooltip.style.top = '';
+        tooltip.style.bottom = '';
+        tooltip.style.left = '';
+        tooltip.style.right = '';
+        tooltip.style.transform = '';
+        tooltip.style.borderBottom = '';
+        tooltip.style.borderTop = '';
+        tooltip.style.borderLeft = '';
+        tooltip.style.borderRight = '';
+        
+        // Apply vertical positioning
+        if (isNearBottom) {
+            // Tooltip above
+            tooltip.style.bottom = '100%';
+            tooltip.style.top = 'auto';
+            tooltip.style.transform = 'translateX(-50%) translateY(-0.5rem)';
+            tooltip.style.left = '50%';
+            tooltip.style.right = 'auto';
+            
+            // Arrow pointing down
+            const pseudo = tooltip.querySelector('::before');
+            if (pseudo) {
+                tooltip.style.borderBottom = 'none';
+                tooltip.style.borderTop = '4px solid rgba(0, 0, 0, 0.9)';
+            }
+        } else {
+            // Default: tooltip below
+            tooltip.style.top = '100%';
+            tooltip.style.bottom = 'auto';
+            tooltip.style.transform = 'translateX(-50%) translateY(0.5rem)';
+            tooltip.style.left = '50%';
+            tooltip.style.right = 'auto';
+        }
+        
+        // Apply horizontal positioning
+        if (isOnLeft) {
+            // Tooltip to the right
+            tooltip.style.left = '100%';
+            tooltip.style.right = 'auto';
+            if (isNearBottom) {
+                tooltip.style.transform = 'translateY(-50%) translateX(0.5rem)';
+                tooltip.style.top = '50%';
+                tooltip.style.bottom = 'auto';
+            } else {
+                tooltip.style.transform = 'translateY(0.5rem) translateX(0.5rem)';
+            }
+            tooltip.classList.add('tooltip-right');
+        } else if (isOnRight) {
+            // Tooltip to the left
+            tooltip.style.right = '100%';
+            tooltip.style.left = 'auto';
+            if (isNearBottom) {
+                tooltip.style.transform = 'translateY(-50%) translateX(-0.5rem)';
+                tooltip.style.top = '50%';
+                tooltip.style.bottom = 'auto';
+            } else {
+                tooltip.style.transform = 'translateY(0.5rem) translateX(-0.5rem)';
+            }
+            tooltip.classList.add('tooltip-left');
+        }
+    }, 0);
+}
+*/

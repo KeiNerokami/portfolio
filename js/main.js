@@ -88,11 +88,16 @@ function openSidebar() {
     const footer = document.querySelector('footer');
 
     sidebar.style.left = '2em';
-    openBtn.style.left = '-40px';
+    openBtn.style.transform = 'translateX(-300px)';
+    
     baseContainers.forEach(container => {
         container.classList.add('shifted');
     });
     footer.style.paddingLeft = '40em';
+    
+    // Disable scrolling
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
 }
 
 function closeSidebar() {
@@ -103,11 +108,19 @@ function closeSidebar() {
 
     sidebar.style.left = '-300px';
     openBtn.style.left = '20px';
+    
     baseContainers.forEach(container => {
         container.classList.remove('shifted');
     });
+    
     footer.style.paddingLeft = '0em';
+    openBtn.style.transform = 'translateX(0)';
+    
+    // Re-enable scrolling
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
 }
+
 function navigateTo(destination) {
     if (!destination || destination === '#') {
         showErrorToast('That section is still under construction.');
@@ -166,7 +179,7 @@ function handleOpenBtnPosition() {
         openBtn.style.left = '1em';
         openBtn.style.zIndex = '2';
     } else {
-        // Stay fixed on header for mobile
+        // Stay fixed on header - mobile
         if (openBtn.parentElement !== body) {
             body.appendChild(openBtn);
         }
@@ -177,8 +190,58 @@ function handleOpenBtnPosition() {
     }
 }
 
+/**
+ * Load reach-out modal from include file
+ */
+function loadReachOutModal() {
+    // Check if modal already exists
+    if (document.getElementById('reach-out-modal')) {
+        return;
+    }
+
+    // Determine the path based on current location
+    const basePath = window.location.pathname.includes('/pages/') ? '../../' : '';
+    const modalPath = basePath + 'includes/reach-out-modal.html';
+
+    fetch(modalPath)
+        .then(response => response.text())
+        .then(html => {
+            document.body.insertAdjacentHTML('beforeend', html);
+        })
+        .catch(error => console.error('Error loading reach-out modal:', error));
+}
+
+/**
+ * Load image modal from include file
+ */
+function loadImageModal() {
+    // Check if modal already exists
+    if (document.getElementById('image-modal')) {
+        return;
+    }
+
+    // Determine the path based on current location
+    const basePath = window.location.pathname.includes('/pages/') ? '../../' : '';
+    const modalPath = basePath + 'includes/image-modal.html';
+
+    fetch(modalPath)
+        .then(response => response.text())
+        .then(html => {
+            document.body.insertAdjacentHTML('beforeend', html);
+            // Set the profile image src after loading
+            const profileImg = document.querySelector('.mini-profile');
+            const modalImg = document.querySelector('.modal-img');
+            if (profileImg && modalImg) {
+                modalImg.src = profileImg.src;
+            }
+        })
+        .catch(error => console.error('Error loading image modal:', error));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     handleOpenBtnPosition();
+    loadReachOutModal();
+    loadImageModal();
     
     const profileImg = document.querySelector('.profile-img');
     const miniProfile = document.querySelector('.mini-profile');
@@ -209,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.addEventListener('resize', handleOpenBtnPosition);
-/* ===== Image Preloader ===== */
+/* ===== Preloader ===== */
 function preloadImages() {
     const imageSelectors = [
         'img',
@@ -263,6 +326,7 @@ function getPlaceholderImage(width = 300, height = 300, seed = '') {
     if (String(seed).startsWith('id:')) {
         // Use specific image ID
         const id = String(seed).substring(3);
+
         return `https://picsum.photos/id/${id}/${width}/${height}`;
     }
     const seedParam = seed ? `?random=${seed}` : '';
@@ -291,15 +355,45 @@ function getPlaceholderImageGrayscale(width = 300, height = 300, seed = '') {
  * @param {number} height - Image height in pixels
  * @param {number} blur - Blur amount (1-10)
  * @param {string} seed - Optional seed for consistent image
- * @returns {string} Blurred placeholder image URL
+ * @returns {string} Blurred placeholder
  */
 function getPlaceholderImageBlurred(width = 300, height = 300, blur = 5, seed = '') {
     const seedParam = seed ? `&random=${seed}` : '';
     return `https://picsum.photos/${width}/${height}?blur=${blur}${seedParam}`;
 }
 
+/** * Open the reach out form modal
+ */
+function openReachOutModal() {
+    const modal = document.getElementById('reach-out-modal');
+    if (modal) {
+        modal.classList.add('show');
+        modal.style.opacity = '1';
+        modal.style.visibility = 'visible';
+    }
+}
+
 /**
- * Load placeholder images into elements with data-placeholder attribute
+ * Close the reach out form modal
+ */
+function closeReachOutModal() {
+    const modal = document.getElementById('reach-out-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.opacity = '0';
+        modal.style.visibility = 'hidden';
+    }
+}
+
+/**
+ * Handle immutable input click (shows error toast)
+ */
+function onImmutableInputClick(event) {
+    event.preventDefault();
+    showErrorToast('Under construction');
+}
+
+/** * Load placeholder images into elements with data-placeholder attribute
  * Format: data-placeholder="width,height[,seed][,style]"
  * Styles: 'grayscale', 'blur'
  * Example: <img data-placeholder="300,300,seed1,grayscale">
