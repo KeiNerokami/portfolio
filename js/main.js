@@ -432,3 +432,52 @@ if (document.readyState === 'loading') {
 } else {
     loadPlaceholderImages();
 }
+
+/**
+ * Load suggest feature modal from includes
+ */
+function loadSuggestFeatureModal() {
+    const container = document.getElementById('suggest-feature-modal-container');
+    if (container && !document.getElementById('suggest-feature-modal')) {
+        fetch('../../includes/suggest-feature-modal.html')
+            .then(response => response.text())
+            .then(html => {
+                container.innerHTML = html;
+            })
+            .catch(error => console.error('Error loading suggest feature modal:', error));
+    }
+}
+
+/**
+ * Open the suggest feature modal
+ */
+function openSuggestFeatureModal() {
+    const modal = document.getElementById('suggest-feature-modal');
+    if (!modal) {
+        loadSuggestFeatureModal();
+        setTimeout(() => {
+            const modal = document.getElementById('suggest-feature-modal');
+            if (modal) {
+                modal.classList.add('show');
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+            }
+        }, 100);
+    } else {
+        modal.classList.add('show');
+        modal.style.opacity = '1';
+        modal.style.visibility = 'visible';
+    }
+}
+
+/**
+ * Close the suggest feature modal
+ */
+function closeSuggestFeatureModal() {
+    const modal = document.getElementById('suggest-feature-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.opacity = '0';
+        modal.style.visibility = 'hidden';
+    }
+}

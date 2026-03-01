@@ -1,0 +1,117 @@
+/* PATRON SUPPORT TOASTS */
+
+.coffee-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.95) 0%, rgba(255, 152, 0, 0.95) 100%);
+    color: #1a1a1a;
+    padding: 1rem 1.4rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(255, 152, 0, 0.4);
+    opacity: 0;
+    transform: translateX(120%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 3000;
+    pointer-events: auto;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.coffee-toast:hover {
+    transform: translateX(110%);
+    box-shadow: 0 15px 35px rgba(255, 152, 0, 0.5);
+}
+
+.patreon-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, rgba(238, 61, 66, 0.95) 0%, rgba(200, 30, 35, 0.95) 100%);
+    color: white;
+    padding: 1rem 1.4rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(238, 61, 66, 0.4);
+    opacity: 0;
+    transform: translateX(120%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 3000;
+    pointer-events: auto;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.patreon-toast:hover {
+    transform: translateX(110%);
+    box-shadow: 0 15px 35px rgba(238, 61, 66, 0.5);
+}
+
+.discord-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, rgba(88, 101, 242, 0.95) 0%, rgba(58, 71, 212, 0.95) 100%);
+    color: white;
+    padding: 1rem 1.4rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(88, 101, 242, 0.4);
+    opacity: 0;
+    transform: translateX(120%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 3000;
+    pointer-events: auto;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.discord-toast:hover {
+    transform: translateX(110%);
+    box-shadow: 0 15px 35px rgba(88, 101, 242, 0.5);
+}
+
+/* Visible state for all patron toasts */
+.coffee-toast.show,
+.patreon-toast.show,
+.discord-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Exit state for all patron toasts */
+.coffee-toast.hide,
+.patreon-toast.hide,
+.discord-toast.hide {
+    opacity: 0;
+    transform: translateX(120%);
+}
+
+/* Responsive design for patron toasts */
+@media (max-width: 768px) {
+    .coffee-toast,
+    .patreon-toast,
+    .discord-toast {
+        bottom: 20px;
+        right: 20px;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .coffee-toast,
+    .patreon-toast,
+    .discord-toast {
+        bottom: 15px;
+        right: 15px;
+        padding: 0.7rem 1rem;
+        font-size: 0.8rem;
+        max-width: 200px;
+        word-wrap: break-word;
+    }
+}

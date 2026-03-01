@@ -4,9 +4,9 @@
 // Pages configuration - add/remove pages here
 // The 'dir' value is the directory name in /pages and will be displayed as the button label
 const pages = [
-    { dir: 'projects', isUnderConstruction: false },
-    { dir: 'contacts', isUnderConstruction: false },
-    { dir: 'testpage', isUnderConstruction: true }
+    { dir: 'projects', isServicePage: false, isUnderConstruction: false },
+    { dir: 'contacts', isServicePage: false, isUnderConstruction: false },
+    { dir: 'testpage', isServicePage: true, isUnderConstruction: false }
     // Add more pages here - new directories will automatically appear in sidebar
 ];
 
@@ -110,6 +110,19 @@ function initializeNavigation() {
  */
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * Check if current page is a service page
+ * @returns {boolean} - True if current page is marked as service page
+ */
+function isCurrentPageServicePage() {
+    const currentPage = getCurrentPageName();
+    if (!currentPage || currentPage === 'home') {
+        return false;
+    }
+    const page = pages.find(p => p.dir === currentPage);
+    return page && page.isServicePage === true;
 }
 
 // Initialize navigation when DOM is ready

@@ -1,0 +1,21 @@
+<div id="suggest-feature-modal" class="reach-out-modal">
+    <div class="reach-out-modal-content">
+        <button class="modal-close" onclick="closeSuggestFeatureModal()">&times;</button>
+        <h2 style="color: #f0f0f0; margin-bottom: 1.5rem;">Suggest a Feature</h2>
+        <form class="reach-out-form">
+            <div class="form-group">
+                <label for="suggest-name">Name</label>
+                <input id="suggest-name" class="immutable-input" placeholder="Enter your name" onclick="onImmutableInputClick(event)" readonly>
+            </div>
+            <div class="form-group">
+                <label for="suggest-email">Email</label>
+                <input id="suggest-email" type="email" class="immutable-input" placeholder="Enter your email" onclick="onImmutableInputClick(event)" readonly>
+            </div>
+            <div class="form-group">
+                <label for="suggest-feature">Feature Suggestion</label>
+                <textarea id="suggest-feature" class="immutable-input" placeholder="Describe the feature you'd like to see..." onclick="onImmutableInputClick(event)" readonly></textarea>
+            </div>
+            <button type="submit" class="reach-out-submit" onclick="event.preventDefault(); onImmutableInputClick(event);">Submit Suggestion</button>
+        </form>
+    </div>
+</div>

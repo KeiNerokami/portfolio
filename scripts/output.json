@@ -1,0 +1,27 @@
+{
+  "questions": [
+    "What is the capital of France?",
+    "Which planet is known as the Red Planet?",
+    "What is the largest ocean on Earth?"
+  ],
+  "answers": [
+    [
+      "Paris",
+      "London",
+      "Berlin",
+      "Madrid"
+    ],
+    [
+      "Venus",
+      "Mars",
+      "Jupiter",
+      "Saturn"
+    ],
+    [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Arctic Ocean",
+      "Pacific Ocean"
+    ]
+  ]
+}

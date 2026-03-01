@@ -76,6 +76,8 @@
 | `.modal-buttons` | Modal button container | Position: absolute (bottom), flex row, gap: 1rem |
 | `.reach-out-modal` | Contact form modal | Position: fixed, full screen, dark backdrop, z-index: 2000 |
 | `.reach-out-modal-content` | Form container | Glassmorphic design, max-width: 500px, padding: 2.5rem |
+| `#suggest-feature-modal` | Feature suggestion modal | Same styling as reach-out-modal |
+| `.suggest-feature-modal` | Dynamic modal class | Inherits reach-out-modal styles |
 
 ### Toast Messages
 
@@ -287,6 +289,30 @@
   - Removes 'show' class
   - Sets opacity: 0 and visibility: hidden
 
+#### `loadSuggestFeatureModal()`
+- **File**: main.js
+- **Purpose**: Load suggest feature modal from includes folder
+- **Behavior**:
+  - Fetches suggest-feature-modal.html from includes folder
+  - Injects HTML into suggest-feature-modal-container
+  - Prevents duplicate loading
+
+#### `openSuggestFeatureModal()`
+- **File**: main.js
+- **Purpose**: Open feature suggestion form modal
+- **Behavior**:
+  - Auto-loads modal if not already in DOM
+  - Adds 'show' class to modal
+  - Sets opacity: 1 and visibility: visible
+  - Used from JSON generator page
+
+#### `closeSuggestFeatureModal()`
+- **File**: main.js
+- **Purpose**: Close feature suggestion modal
+- **Behavior**:
+  - Removes 'show' class
+  - Sets opacity: 0 and visibility: hidden
+
 ### Image Utilities
 
 #### `preloadImages()`
@@ -473,6 +499,16 @@ const pages = [
 - Styled with glassmorphic design
 - Smooth slide-in animation
 
+#### Suggest Feature Modal
+- Similar structure to Reach Out Modal
+- Form with three immutable fields:
+  - Your Name (text input)
+  - Your Email (email input)
+  - Feature Suggestion (textarea)
+- Located on JSON Generator page
+- Accessible via "Suggest a feature" clickable text link
+- All inputs show "Under construction" toast on click
+
 ### 📊 Projects Section
 
 - **Layout**: Auto-fill grid with 300px minimum column width
@@ -483,7 +519,35 @@ const pages = [
   - Hover lift animation with shadow increase
   - Links to GitHub repository
 
-### 📈 Contribution Graph
+### � JSON Generator
+
+#### Features
+- **Location**: `/pages/jsonify/` (testpage with service feature)
+- **Purpose**: Convert questions and answers into JSON format
+- **Backend**: Python script (`scripts/jsonify.py`) for validation
+
+#### User Interface
+- Two textarea inputs:
+  - Questions (one per line)
+  - Answers (comma-separated per line)
+- Generate button to create JSON output
+- JSON output display in formatted `<pre>` block
+- Copy-to-clipboard button
+- "Suggest a feature" link to open suggestion modal
+
+#### Answer Parsing
+- Auto-fixes invalid JSON
+- Handles comma-separated values
+- Removes quotes and brackets from inputs
+- Validates matching question/answer counts
+- Error toast for mismatched data
+
+#### Suggestion Modal
+- Opens when clicking "Suggest a feature" text
+- Allows users to submit feature ideas
+- Currently shows "Under construction" message on form interaction
+
+### �📈 Contribution Graph
 
 #### Data Source
 - GitHub GraphQL API (primary)
@@ -644,4 +708,4 @@ showInfoToast('Info message');
 
 ---
 
-*Documentation last updated: February 28, 2026*
+*Documentation last updated: March 1, 2026*
